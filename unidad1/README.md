@@ -273,3 +273,4 @@ A pesar de sus ventajas, hay casos donde un SGBD puede ser innecesario o contrap
 | [`practica/01_intro_sqlite.py`](./practica/01_intro_sqlite.py) | Primera BD con Python y SQLite |
 | [`practica/01_intro.sql`](./practica/01_intro.sql) | Primeros comandos SQL |
 | [`practica/enunciados.md`](./practica/enunciados.md) | Ejercicios de la unidad |
+| [`teoria/apuntes.md`](./teoria/apuntes.md) | Resumen, ejercicios resueltos y preguntas de examen |

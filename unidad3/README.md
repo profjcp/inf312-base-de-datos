@@ -295,3 +295,4 @@ FUNCIONES DE AGREGACIÓN (extensión del álgebra relacional):
 | [`practica/01_modelo_relacional.py`](./practica/01_modelo_relacional.py) | Restricciones e integridad en Python/SQLite |
 | [`practica/01_algebra_relacional.sql`](./practica/01_algebra_relacional.sql) | Álgebra relacional traducida a SQL |
 | [`practica/enunciados.md`](./practica/enunciados.md) | Ejercicios del modelo relacional |
+| [`teoria/apuntes.md`](./teoria/apuntes.md) | Álgebra relacional, ejercicios resueltos y preguntas de examen |

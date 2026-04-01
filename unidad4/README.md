@@ -371,11 +371,177 @@ Niveles de privilegio:
 
 ---
 
+## 4.8 Expresiones de Tabla Comunes (CTEs)
+
+Una **CTE** (`WITH`) es una consulta nombrada que se define antes del `SELECT` principal. Mejora legibilidad y evita subconsultas repetidas.
+
+```sql
+-- CTE simple: promedio por carrera
+WITH promedios_carrera AS (
+    SELECT e.id_carrera,
+           AVG(i.nota) AS promedio
+    FROM INSCRIPCION i
+    JOIN ESTUDIANTE e ON i.ci = e.ci
+    WHERE i.nota IS NOT NULL
+    GROUP BY e.id_carrera
+)
+SELECT c.nombre AS carrera,
+       ROUND(p.promedio, 2) AS promedio_notas
+FROM promedios_carrera p
+JOIN CARRERA c ON p.id_carrera = c.id_carrera
+ORDER BY promedio_notas DESC;
+
+-- CTEs encadenados: porcentaje de aprobación por materia
+WITH totales AS (
+    SELECT codigo,
+           COUNT(*)                                      AS total,
+           SUM(CASE WHEN nota >= 51 THEN 1 ELSE 0 END)  AS aprobados
+    FROM INSCRIPCION
+    WHERE nota IS NOT NULL
+    GROUP BY codigo
+),
+porcentajes AS (
+    SELECT t.codigo,
+           m.nombre,
+           t.total,
+           t.aprobados,
+           ROUND(100.0 * t.aprobados / t.total, 1)      AS pct_aprobacion
+    FROM totales t
+    JOIN MATERIA m ON t.codigo = m.codigo
+)
+SELECT *
+FROM porcentajes
+WHERE pct_aprobacion < 60   -- materias con alto nivel de reprobación
+ORDER BY pct_aprobacion;
+```
+
+> **CTE vs Subconsulta en FROM:** Un CTE corre una sola vez aunque se refiera múltiples veces. Una subconsulta en `FROM` también funciona pero se vuelve ilegible si es compleja. Preferir CTEs cuando la lógica ayuda a la comprensión.
+
+---
+
+## 4.9 Funciones de Ventana
+
+Las **funciones de ventana** calculan un valor para cada fila tomando en cuenta un conjunto de filas relacionadas (la "ventana"), **sin colapsar el resultado** como haría `GROUP BY`.
+
+```sql
+-- Sintaxis general:
+función() OVER (
+    [PARTITION BY columna(s)]   -- divide en grupos (como GROUP BY sin colapsar)
+    [ORDER BY columna(s)]       -- orden dentro de cada partición
+    [ROWS/RANGE ...]            -- tamaño de la ventana (avanzado)
+)
+```
+
+### Funciones de ranking
+
+```sql
+-- ROW_NUMBER: número de fila único, sin empates
+SELECT ci, codigo, nota,
+       ROW_NUMBER() OVER (PARTITION BY codigo ORDER BY nota DESC) AS fila
+FROM INSCRIPCION WHERE nota IS NOT NULL;
+
+-- RANK: igual ranking para empates, salta números (1,1,3)
+SELECT ci, codigo, nota,
+       RANK() OVER (PARTITION BY codigo ORDER BY nota DESC) AS puesto
+FROM INSCRIPCION WHERE nota IS NOT NULL;
+
+-- DENSE_RANK: igual ranking para empates, sin saltar (1,1,2)
+SELECT ci, codigo, nota,
+       DENSE_RANK() OVER (PARTITION BY codigo ORDER BY nota DESC) AS puesto
+FROM INSCRIPCION WHERE nota IS NOT NULL;
+```
+
+### Funciones de agregación como ventana
+
+```sql
+-- Nota de cada estudiante vs promedio de su materia
+SELECT
+    e.nombre || ' ' || e.apellido                              AS estudiante,
+    m.nombre                                                   AS materia,
+    i.nota,
+    ROUND(AVG(i.nota) OVER (PARTITION BY i.codigo), 1)        AS promedio_materia,
+    ROUND(i.nota - AVG(i.nota) OVER (PARTITION BY i.codigo), 1) AS diferencia
+FROM INSCRIPCION i
+JOIN ESTUDIANTE e ON i.ci     = e.ci
+JOIN MATERIA    m ON i.codigo = m.codigo
+WHERE i.nota IS NOT NULL;
+```
+
+### Funciones LAG / LEAD
+
+```sql
+-- Comparar nota actual con la anterior del mismo estudiante (por fecha gestión)
+SELECT ci, gestion, nota,
+       LAG(nota)  OVER (PARTITION BY ci ORDER BY gestion) AS nota_anterior,
+       nota - LAG(nota) OVER (PARTITION BY ci ORDER BY gestion) AS progreso
+FROM INSCRIPCION
+WHERE nota IS NOT NULL;
+```
+
+> **Nota de compatibilidad:** Las funciones de ventana requieren SQLite ≥ 3.25.0 (septiembre 2018). Verificar con `SELECT sqlite_version();`. PostgreSQL las soporta completamente desde la versión 8.4.
+
+---
+
+## 4.10 Diseño Físico — Índices
+
+El **diseño físico** decide cómo se almacenan los datos para optimizar el rendimiento. El principal mecanismo son los **índices**.
+
+### ¿Cómo funciona un índice?
+
+```
+Sin índice: buscar ci='7654321' en 1,000,000 de filas
+  → Lectura secuencial: revisar fila por fila → O(n)
+
+Con índice B-Tree en ci:
+  → Búsqueda binaria en el árbol → O(log n) → miles de veces más rápido
+```
+
+### Cuándo crear un índice
+
+```sql
+-- ✓ Crear índice cuando:
+--   · La columna aparece frecuentemente en WHERE
+--   · La columna es FK (para acelerar JOINs)
+--   · La columna aparece en ORDER BY de consultas frecuentes
+--   · La columna tiene alta cardinalidad (muchos valores distintos)
+
+CREATE INDEX idx_estudiante_apellido  ON ESTUDIANTE(apellido);
+CREATE INDEX idx_inscripcion_ci       ON INSCRIPCION(ci);
+CREATE INDEX idx_inscripcion_codigo   ON INSCRIPCION(codigo);
+CREATE INDEX idx_inscripcion_gestion  ON INSCRIPCION(gestion);
+
+-- Índice compuesto: útil cuando se filtra por ambas columnas juntas
+CREATE INDEX idx_insc_ci_codigo ON INSCRIPCION(ci, codigo);
+
+-- ✗ No crear índice cuando:
+--   · La tabla tiene pocas filas (< 1,000 filas aprox.)
+--   · La columna tiene baja cardinalidad (ej: sexo: solo 2 valores)
+--   · La tabla recibe muchos INSERT/UPDATE (el índice se reconstruye)
+```
+
+### EXPLAIN QUERY PLAN (SQLite)
+
+```sql
+-- Ver el plan de ejecución ANTES de optimizar
+EXPLAIN QUERY PLAN
+SELECT * FROM INSCRIPCION WHERE ci = '7654321';
+-- Sin índice: "SCAN INSCRIPCION"  → recorre toda la tabla
+
+-- Crear el índice y verificar
+CREATE INDEX idx_insc_ci ON INSCRIPCION(ci);
+EXPLAIN QUERY PLAN
+SELECT * FROM INSCRIPCION WHERE ci = '7654321';
+-- Con índice: "SEARCH INSCRIPCION USING INDEX idx_insc_ci" → optimizado ✓
+```
+
+---
+
 ## 📁 Archivos de esta unidad
 
 | Archivo | Descripción |
 |---------|-------------|
 | [`practica/01_ddl_dml.sql`](./practica/01_ddl_dml.sql) | DDL y DML completo — BD Farmacia |
-| [`practica/02_consultas_avanzadas.sql`](./practica/02_consultas_avanzadas.sql) | JOINs, subconsultas, vistas |
+| [`practica/02_consultas_avanzadas.sql`](./practica/02_consultas_avanzadas.sql) | JOINs, subconsultas, CTEs, funciones de ventana |
 | [`practica/03_sql_python.py`](./practica/03_sql_python.py) | SQL desde Python con SQLite |
-| [`practica/enunciados.md`](./practica/enunciados.md) | 20 ejercicios de SQL |
+| [`practica/enunciados.md`](./practica/enunciados.md) | 14 ejercicios graduados de SQL |
+| [`teoria/apuntes.md`](./teoria/apuntes.md) | Referencia rápida, ejercicios resueltos y errores comunes |

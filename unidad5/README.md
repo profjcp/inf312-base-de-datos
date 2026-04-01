@@ -243,10 +243,98 @@ Tabla sin normalizar
 
 ---
 
+## 5.5 SQL Relacional vs NoSQL — Perspectiva comparativa
+
+El modelo relacional con normalización es la base de los SGBD SQL. Sin embargo, en proyectos modernos aparecen frecuentemente bases de datos **NoSQL** (Not only SQL). Esta sección ofrece una introducción comparativa.
+
+### ¿Por qué existen las BD NoSQL?
+
+El modelo relacional normalizado es excelente para **integridad y consistencia**, pero puede ser un cuello de botella cuando:
+
+- Los datos no tienen estructura fija (esquema dinámico)
+- El sistema necesita escalar horizontalmente a miles de servidores
+- Se procesan millones de operaciones por segundo (redes sociales, IoT)
+- Los datos son inherentemente jerárquicos o en grafo
+
+### Tipos principales de NoSQL
+
+| Tipo | Estructura | Casos de uso | Ejemplos |
+|------|-----------|-------------|---------|
+| **Documento** | JSON/BSON anidado | CMS, catálogos, perfiles de usuario | MongoDB, CouchDB |
+| **Clave-Valor** | Diccionario simple | Caché, sesiones, configuración | Redis, DynamoDB |
+| **Columnar** | Columnas agrupadas | Analítica de grandes volúmenes (OLAP) | Cassandra, HBase |
+| **Grafo** | Nodos y aristas | Redes sociales, rutas, recomendaciones | Neo4j, Amazon Neptune |
+
+### Ejemplo comparativo: Consulta de un perfil
+
+**SQL normalizado (3FN):**
+```sql
+-- 3 tablas, 2 JOINs para obtener el perfil completo
+SELECT u.nombre, u.email,
+       d.calles, d.ciudad,
+       t.numero, t.tipo
+FROM USUARIO u
+JOIN DIRECCION d ON u.id = d.id_usuario
+JOIN TELEFONO  t ON u.id = t.id_usuario
+WHERE u.id = 42;
+```
+
+**MongoDB (documento):**
+```json
+// Todo en un documento, una sola lectura
+{
+  "_id": 42,
+  "nombre": "Ana García",
+  "email": "ana@example.com",
+  "direccion": { "calle": "Av. Cañoto 123", "ciudad": "Santa Cruz" },
+  "telefonos": ["71234567", "33456789"]
+}
+```
+
+### ¿SQL o NoSQL?
+
+```
+                    ┌─────────────┐
+                    │  Estructura │
+                    │  de datos   │
+                    └──────┬──────┘
+                           │
+                ┌──────────┴──────────┐
+           Estructura fija        Estructura flexible
+           relaciones complejas   / documentos anidados
+                │                          │
+                ▼                          ▼
+           SQL (relacional)          NoSQL (documento)
+           PostgreSQL, MySQL         MongoDB, CouchDB
+           SQLite                         │
+                                          ▼
+                               Alta escala / baja latencia?
+                                    │            │
+                                   SÍ            NO
+                                    │
+                              Redis (cache)
+                              Cassandra (big data)
+```
+
+### Propiedades BASE vs ACID
+
+| ACID (SQL) | BASE (NoSQL) |
+|-----------|-------------|
+| **A**tomicity | **B**asically **A**vailable |
+| **C**onsistency | **S**oft state |
+| **I**solation | **E**ventually consistent |
+| **D**urability | — |
+
+> Los sistemas NoSQL prioriza disponibilidad y rendimiento sobre consistencia inmediata. En una red social, está bien que un "me gusta" tarde 1 segundo en propagarse. En un sistema bancario, NO está bien.
+
+> **Para este curso:** el foco es el modelo relacional. NoSQL es un tema de materias posteriores (Bases de Datos II, Sistemas Distribuidos). Esta sección sólo da contexto de cuándo SQL es la herramienta correcta —que es la mayoría de los casos de negocios.
+
+---
+
 ## 📁 Archivos de esta unidad
 
 | Archivo | Descripción |
 |---------|-------------|
 | [`practica/01_normalizacion.py`](./practica/01_normalizacion.py) | Demostración paso a paso: 0FN → 3FN |
-| [`practica/01_normalizacion.sql`](./practica/01_normalizacion.sql) | SQL antes y después de normalizar |
-| [`practica/enunciados.md`](./practica/enunciados.md) | 8 ejercicios de normalización |
+| [`practica/enunciados.md`](./practica/enunciados.md) | 8 ejercicios graduados de normalización |
+| [`teoria/apuntes.md`](./teoria/apuntes.md) | Reglas de Armstrong, cierre de atributos, ejercicios resueltos |

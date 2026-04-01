@@ -21,7 +21,7 @@ Modelar bases de datos utilizando una metodología determinada asociada a un par
 | [Unidad II](./unidad2/) | Diseño Conceptual bajo Modelo Orientado a Objetos | 20 hs |
 | [Unidad III](./unidad3/) | Modelo Relacional | 18 hs |
 | [Unidad IV](./unidad4/) | Lenguaje Estructurado de Consulta (SQL) | 20 hs |
-| [Unidad V](./unidad5/) | Normalización y Dependencias Funcionales | 10 hs |
+| [Unidad V](./unidad5/) | Normalización y Dependencias Funcionales | 14 hs |
 | [Proyecto Final](./proyecto/) | Diseño e implementación de BD caso real | — |
 
 ---
@@ -30,12 +30,13 @@ Modelar bases de datos utilizando una metodología determinada asociada a un par
 
 ```
 unidadX/
-├── README.md        ← Teoría completa con diagramas y ejemplos
-├── teoria/          ← Apuntes y ejercicios resueltos adicionales
-└── practica/        ← Scripts SQL y Python ejecutables
-    ├── XX_practica.sql
-    ├── XX_practica.py
-    └── enunciados.md
+├── README.md           ← Teoría completa con diagramas y ejemplos
+├── teoria/
+│   └── apuntes.md      ← Resumen, ejercicios resueltos y preguntas de examen
+└── practica/
+    ├── XX_practica.sql ← Scripts SQL ejecutables (SQLite)
+    ├── XX_practica.py  ← Scripts Python con sqlite3
+    └── enunciados.md   ← Enunciados de ejercicios prácticos
 ```
 
 ---
@@ -60,6 +61,17 @@ python --version  # Python 3.8 o superior
 ```
 
 > 💡 **Todas las prácticas SQL están escritas para SQLite** (sin instalación adicional), pero incluyen notas de compatibilidad con PostgreSQL y MySQL.
+
+### Herramientas de diagramado recomendadas
+
+| Herramienta | Uso | Acceso |
+|-------------|-----|--------|
+| [dbdiagram.io](https://dbdiagram.io) | Diagramas ER desde SQL o DBML | Gratuito, web |
+| [draw.io / diagrams.net](https://app.diagrams.net) | Diagramas UML y ER manuales | Gratuito, web |
+| [DBeaver](https://dbeaver.io) | Cliente SQL + diagramas desde BD real | Gratuito, instalable |
+| StarUML | Diagramas de clases UML profesionales | Descarga |
+
+> Para el proyecto final se recomienda **draw.io** (fácil) o **StarUML** (profesional).
 
 ---
 

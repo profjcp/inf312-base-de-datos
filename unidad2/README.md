@@ -288,10 +288,123 @@ Opción C: Tabla por clase (una tabla por clase)  ← RECOMENDADA
 
 ---
 
+## 2.6 Modelo Entidad-Relación (ER) — Notación de Chen
+
+El **Modelo ER** fue propuesto por Peter Chen en 1976 y es el estándar histórico para el diseño conceptual. Aunque este curso usa Diagramas de Clases UML, el modelo ER es ampliamente utilizado en la industria y en libros de texto (Elmasri & Navathe, Silberschatz).
+
+### Elementos del modelo ER
+
+```
+Entidad              Atributo          Relación
+┌─────────┐          ───○ simple       ◇─────────
+│ ENTIDAD │          ──○○ multivaluado
+└─────────┘          ──○ derivado
+                     ──(○) compuesto
+```
+
+```
+Simbología completa:
+
+  ┌───────────────┐                   ┌─────────────┐
+  │   ESTUDIANTE  │ ───── inscrito ────│   MATERIA   │
+  └───────────────┘   N             M └─────────────┘
+         │                                   │
+         ○ ci (PK, subrayado)                ○ codigo (PK)
+         ○ nombre                            ○ nombre
+         ○ apellido                          ○ creditos
+         ○ fecha_nac
+         ○─ dirección (compuesto)
+              ├─ calle
+              └─ ciudad
+```
+
+### Tipos de entidades
+
+```
+ENTIDAD FUERTE (Rectángulo simple):
+  Tiene existencia propia, tiene clave primaria propia.
+  ESTUDIANTE, MATERIA, CARRERA
+
+ENTIDAD DÉBIL (Rectángulo doble):
+  Depende de otra entidad para existir.
+  No tiene clave completa por sí sola.
+
+  ╔═════════════╗            ╔══════════════╗
+  ║    PEDIDO   ║ ─── tiene ─║ LÍNEA_PEDIDO ║
+  ╚═════════════╝      1:N   ╚══════════════╝
+  PK: id_pedido              PK parcial: num_linea
+                             PK completa: (id_pedido, num_linea)
+```
+
+### Cardinalidades en notación ER vs UML
+
+| Tipo | Notación Chen | Notación UML |
+|------|--------------|--------------|
+| Uno a uno | 1:1 | `1` — `1` |
+| Uno a muchos | 1:N | `1` — `*` |
+| Muchos a muchos | M:N | `*` — `*` |
+
+### Participación total vs parcial
+
+```
+Participación TOTAL (doble línea ══): todas las instancias participan.
+Participación PARCIAL (línea simple ─): algunas instancias pueden no participar.
+
+  ┌──────────┐ ══════ trabaja_en ────── ┌────────────┐
+  │ EMPLEADO │                           │ DEPARTAMENTO│
+  └──────────┘                          └────────────┘
+  (todo empleado debe trabajar en algún departamento,
+   pero puede haber departamentos sin empleados asignados)
+```
+
+### Diagrama ER completo — BD Universitaria
+
+```
+    ┌─────────┐                       ┌─────────┐
+    │ CARRERA │ ──── pertenece ──── N │ESTUDIANTE│
+    └─────────┘  1                    └──────────┘
+    ○ id_carrera (PK)                 ○ ci (PK)
+    ○ nombre                          ○ nombre
+    ○ duracion                        ○ apellido
+                                      ○ fecha_nac
+                                            │ N
+                                       ─────────────
+                                       │ INSCRIPCION │ (relación con atributos)
+                                       ─────────────
+                                       ○ gestion
+                                       ○ nota
+                                            │ M
+                                      ┌──────────┐
+                                      │  MATERIA  │
+                                      └──────────┘
+                                      ○ codigo (PK)
+                                      ○ nombre
+                                      ○ creditos
+                                      ○ nivel
+```
+
+### Comparación ER vs UML para bases de datos
+
+| Aspecto | Modelo ER (Chen) | Diagrama de Clases UML |
+|---------|-----------------|------------------------|
+| Entidades | Rectángulos | Clases (3 compartimentos) |
+| Atributos | Óvalos | Dentro de la clase |
+| Relaciones | Rombos con nombre | Líneas con nombre (opcional) |
+| Cardinalidad | 1, N, M junto a la línea | Multiplicidades en los extremos |
+| Atributos de relación | Óvalo unido al rombo | Clase de asociación |
+| Herencia | No nativa (extensiones) | Flecha con triángulo hueco |
+| Entidades débiles | Rectángulo doble | Composición (◆) |
+| Uso habitual | Diseño conceptual BD | Diseño OO, también BD |
+
+> **Conclusión:** Ambos modelos son equivalentes para diseño de BD. UML es más expresivo (herencia, métodos, visibilidad). ER es más conciso para el esquema de datos puro. En este curso usamos UML; en Elmasri & Navathe encontrarás ER.
+
+---
+
 ## 📁 Archivos de esta unidad
 
 | Archivo | Descripción |
 |---------|-------------|
 | [`practica/01_mapeo_orm.py`](./practica/01_mapeo_orm.py) | Mapeo OO → Relacional en Python |
-| [`practica/01_herencia.sql`](./practica/01_herencia.sql) | Implementación de herencia en SQL |
+| [`practica/01_herencia_mapeo.sql`](./practica/01_herencia_mapeo.sql) | Implementación de herencia en SQL |
 | [`practica/enunciados.md`](./practica/enunciados.md) | Ejercicios de modelado |
+| [`teoria/apuntes.md`](./teoria/apuntes.md) | Resumen, mapeo resuelto y preguntas de examen |
