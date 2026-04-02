@@ -3,6 +3,8 @@
 **Tiempo:** 12 horas  
 **Objetivo:** Describir los componentes de un sistema de base de datos.
 
+**Evaluacion sugerida:** [evaluacion.md](evaluacion.md)
+
 ---
 
 ## 1.1 Introducción: Conceptos Generales

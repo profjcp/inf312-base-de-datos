@@ -3,6 +3,8 @@
 **Tiempo:** 18 horas  
 **Objetivo:** Diseñar una base de datos utilizando los conceptos del modelo relacional (estructura, restricciones y lenguaje).
 
+**Evaluacion sugerida:** [evaluacion.md](evaluacion.md)
+
 ---
 
 ## Resultado de aprendizaje de la unidad

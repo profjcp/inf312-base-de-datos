@@ -3,6 +3,8 @@
 **Tiempo:** 20 horas  
 **Objetivo:** Aplicar el modelo orientado a objetos como herramienta de modelado conceptual de datos en la fase de diseño de una base de datos.
 
+**Evaluacion sugerida:** [evaluacion.md](evaluacion.md)
+
 ---
 
 ## 2.1 Introducción

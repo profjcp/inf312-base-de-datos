@@ -9,6 +9,8 @@
 
 ## 📋 Descripción General
 
+**Rubrica de defensa:** [rubrica_defensa.md](rubrica_defensa.md)
+
 El proyecto consiste en diseñar e implementar una base de datos para un **Hospital Público de Santa Cruz de la Sierra**. El sistema debe gestionar pacientes, médicos, consultas, hospitalizaciones, medicamentos e insumos.
 
 El proyecto se evalúa en **dos fases:**

@@ -158,6 +158,19 @@ Objetivo del curso: llegar como mínimo a Nivel 3 en todas las unidades y Nivel 
 
 ---
 
+## 📝 Banco de Evaluacion y Rubricas
+
+| Recurso | Archivo |
+|---------|---------|
+| Evaluacion Unidad I | [unidad1/evaluacion.md](unidad1/evaluacion.md) |
+| Evaluacion Unidad II | [unidad2/evaluacion.md](unidad2/evaluacion.md) |
+| Evaluacion Unidad III | [unidad3/evaluacion.md](unidad3/evaluacion.md) |
+| Evaluacion Unidad IV | [unidad4/evaluacion.md](unidad4/evaluacion.md) |
+| Evaluacion Unidad V | [unidad5/evaluacion.md](unidad5/evaluacion.md) |
+| Rubrica de defensa de proyecto | [proyecto/rubrica_defensa.md](proyecto/rubrica_defensa.md) |
+
+---
+
 ## 🧱 Integración progresiva con el Proyecto
 
 | Unidad | Aporte al proyecto Hospital |

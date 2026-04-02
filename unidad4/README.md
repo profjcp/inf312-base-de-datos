@@ -3,6 +3,8 @@
 **Tiempo:** 20 horas  
 **Objetivo:** Utilizar el lenguaje estructurado de consultas para la definición, construcción y manipulación de bases de datos.
 
+**Evaluacion sugerida:** [evaluacion.md](evaluacion.md)
+
 ---
 
 ## Resultado de aprendizaje de la unidad

@@ -3,6 +3,8 @@
 **Tiempo:** 10 horas  
 **Objetivo:** Identificar y eliminar las anomalías en las relaciones utilizando las reglas de normalización.
 
+**Evaluacion sugerida:** [evaluacion.md](evaluacion.md)
+
 ---
 
 ## Resultado de aprendizaje de la unidad
