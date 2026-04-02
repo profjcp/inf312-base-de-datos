@@ -2,9 +2,36 @@
 ## INF-312 BASE DE DATOS I
 
 Universidad Autonoma Gabriel Rene Moreno  
+Facultad de Ingenieria en Ciencias de la Computacion y Telecomunicaciones  
 Semestre: Quinto  
 Carga horaria: 6 horas por semana (4HT + 2HP)  
 Duracion sugerida: 15 semanas
+
+---
+
+## UNIDADES DEL CURSO
+
+- Unidad I: Introduccion a los sistemas de bases de datos.
+- Unidad II: Diseno conceptual orientado a objetos (UML).
+- Unidad III: Modelo relacional y algebra relacional.
+- Unidad IV: SQL para definicion, manipulacion y analisis.
+- Unidad V: Normalizacion y dependencias funcionales.
+- Proyecto final: Caso integrador de gestion hospitalaria.
+
+---
+
+## TABLA DE CONTENIDOS
+
+1. Proposito de la guia.
+2. Objetivo general del curso.
+3. Resultados de aprendizaje esperados.
+4. Metodologia de trabajo por clase.
+5. Plan de clases por semanas.
+6. Sistema de evaluacion sugerido.
+7. Estrategia de seguimiento del estudiante.
+8. Recomendaciones didacticas para estudiantes.
+9. Producto final del curso.
+10. Bibliografia base.
 
 ---
 
