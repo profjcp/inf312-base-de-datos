@@ -20,6 +20,35 @@ El proyecto se evalúa en **dos fases:**
 
 ---
 
+## 🛤️ Trazabilidad por hitos (durante el semestre)
+
+Para evitar concentrar todo al final, el proyecto se construye por entregas parciales conectadas a cada unidad:
+
+| Momento | Entrega parcial | Relación con unidad |
+|---------|------------------|---------------------|
+| Semana 2 | Alcance del caso, actores y reglas de negocio | Unidad I |
+| Semana 5 | Diagrama UML consolidado | Unidad II |
+| Semana 8 | Esquema relacional con PK/FK y restricciones | Unidad III |
+| Semana 12 | DDL + DML + consultas base | Unidad IV |
+| Semana 14 | Verificación de normalización y ajustes | Unidad V |
+| Semana 15 | Entrega y defensa final | Integración |
+
+---
+
+## ✅ Criterios de aceptación técnica mínimos
+
+La entrega final se considera lista cuando cumple:
+
+- El script SQL se ejecuta de inicio a fin sin errores en una BD vacía.
+- Todas las FK tienen política explícita de ON DELETE/ON UPDATE.
+- Existen datos de prueba suficientes para demostrar cada consulta requerida.
+- Las consultas entregadas están comentadas y validadas.
+- Las vistas responden a necesidades reales de operación.
+- La normalización está justificada hasta 3FN como mínimo.
+- El modelo implementado refleja el diagrama conceptual aprobado.
+
+---
+
 ## 📐 Fase 1 — Diseño Conceptual e Intermedio
 
 ### Entregable: Documento técnico (PDF) + Diagrama de Clases

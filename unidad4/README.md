@@ -5,6 +5,44 @@
 
 ---
 
+## Resultado de aprendizaje de la unidad
+
+Al finalizar la unidad podrás construir una base de datos funcional en SQL (DDL y DML), resolver consultas de complejidad creciente y automatizar operaciones desde Python con buenas prácticas.
+
+## Ruta recomendada de trabajo
+
+1. Implementa primero el esquema completo (DDL) y valida restricciones.
+2. Inserta datos de prueba realistas (DML) para cubrir casos límite.
+3. Resuelve consultas básicas y luego avanzadas (JOIN, subconsultas, CTE).
+4. Crea vistas útiles para reportes recurrentes.
+5. Ejecuta scripts SQL desde Python usando parámetros seguros.
+
+## Práctica por niveles
+
+| Nivel | Meta práctica |
+|------|---------------|
+| Básico | Crear tablas con PK/FK/CHECK y hacer CRUD correcto |
+| Medio | Resolver consultas multi-tabla con JOIN y agregación |
+| Reto | Diseñar consultas analíticas con CTE y ventanas |
+
+## Hito de proyecto (Unidad IV)
+
+Entregar para el caso Hospital:
+
+- Script DDL completo ejecutable sin errores.
+- Carga de datos de prueba coherentes.
+- Implementación inicial de las consultas requeridas.
+- Al menos 1 vista útil validada con datos reales.
+
+## Autoevaluación rápida
+
+- ¿Tu script puede ejecutarse de inicio a fin en una BD vacía?
+- ¿Tus consultas críticas tienen resultados verificados?
+- ¿Usas transacciones donde corresponde?
+- ¿Tu código Python evita SQL injection con parámetros?
+
+---
+
 ## 4.1 Sublenguaje de Definición de Datos (DDL)
 
 El **DDL** define y modifica la estructura de la base de datos.

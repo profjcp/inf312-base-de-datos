@@ -101,6 +101,77 @@ Proyecto Final
 
 ---
 
+## 🧭 Ruta de Aprendizaje (15 semanas)
+
+| Semana | Enfoque | Evidencia de avance |
+|--------|---------|---------------------|
+| 1 | Unidad I: conceptos base de BD y SGBD | Resumen conceptual + glosario corto |
+| 2 | Unidad I: arquitectura ANSI/SPARC y actores | Mini cuestionario (10 preguntas) |
+| 3 | Unidad II: clases, objetos, atributos, asociaciones | Diagrama UML inicial del caso |
+| 4 | Unidad II: herencia, agregación, composición | Diagrama UML corregido con multiplicidades |
+| 5 | Unidad II: mapeo OO a relacional (base) | Esquema relacional preliminar |
+| 6 | Unidad III: dominios, claves, integridad | Lista de restricciones del esquema |
+| 7 | Unidad III: álgebra relacional (operaciones básicas) | 8 consultas expresadas en álgebra + SQL |
+| 8 | Unidad III: álgebra avanzada y diseño de consultas | Práctica evaluada de consultas complejas |
+| 9 | Unidad IV: DDL y diseño físico básico | Script DDL funcional |
+| 10 | Unidad IV: DML y transacciones | Script de carga de datos + pruebas ACID |
+| 11 | Unidad IV: JOINs, subconsultas, CTE | Banco de consultas resueltas |
+| 12 | Unidad IV: vistas y SQL con Python | Script Python conectado a SQLite |
+| 13 | Unidad V: dependencias funcionales y 1FN-2FN | Normalización documentada parcial |
+| 14 | Unidad V: 3FN, FNBC y casos límite | Normalización final y justificación |
+| 15 | Proyecto: integración y defensa | Entrega final + demo de consultas |
+
+---
+
+## 🧩 Metodología de Estudio por Unidad
+
+En cada unidad se recomienda seguir este ciclo:
+
+1. Teoría mínima necesaria: leer ideas clave y mapa conceptual.
+2. Caso guiado: resolver un ejemplo completo paso a paso.
+3. Práctica escalonada: ejercicios por nivel (básico, medio, reto).
+4. Autoevaluación: checklist y preguntas de control.
+5. Hito de proyecto: aplicar lo aprendido al caso Hospital.
+
+---
+
+## 🎚️ Niveles de dominio
+
+| Nivel | Descripción | Evidencia |
+|------|-------------|-----------|
+| Nivel 1 | Reconoce conceptos y terminología | Responde preguntas teóricas con precisión |
+| Nivel 2 | Aplica técnicas en ejercicios dirigidos | Resuelve prácticas con apoyo de guía |
+| Nivel 3 | Resuelve casos nuevos de forma autónoma | Entrega consultas/modelos sin plantilla |
+| Nivel 4 | Diseña soluciones completas con justificación | Integra diseño, implementación y validación |
+
+Objetivo del curso: llegar como mínimo a Nivel 3 en todas las unidades y Nivel 4 en el proyecto final.
+
+---
+
+## ✅ Checklist semanal de autoestudio
+
+- Leí y resumí la teoría clave de la semana.
+- Resolví al menos un ejercicio de cada nivel.
+- Verifiqué resultados con SQL ejecutable.
+- Registré errores cometidos y cómo corregirlos.
+- Actualicé el avance del proyecto con el hito semanal.
+
+---
+
+## 🧱 Integración progresiva con el Proyecto
+
+| Unidad | Aporte al proyecto Hospital |
+|--------|-----------------------------|
+| Unidad I | Delimitación del problema, actores, alcance y reglas de negocio |
+| Unidad II | Diagrama conceptual UML con clases y relaciones |
+| Unidad III | Esquema relacional con PK/FK y restricciones |
+| Unidad IV | Script SQL (DDL+DML), consultas y vistas |
+| Unidad V | Normalización y mejoras de consistencia |
+
+Esta integración evita dejar todo para el final y convierte el proyecto en una evidencia acumulativa.
+
+---
+
 ## 📊 Sistema de Evaluación
 
 | Ítem | Descripción | Porcentaje | Unidades |

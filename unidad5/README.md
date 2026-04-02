@@ -5,6 +5,44 @@
 
 ---
 
+## Resultado de aprendizaje de la unidad
+
+Al finalizar la unidad podrás identificar dependencias funcionales, detectar anomalías de diseño y normalizar esquemas hasta 3FN (y cuando sea necesario FNBC), justificando cada descomposición.
+
+## Ruta recomendada de trabajo
+
+1. Identifica claves candidatas y dependencias funcionales.
+2. Verifica 1FN, 2FN y 3FN en secuencia.
+3. Descompón tablas con anomalías y valida pérdida/cobertura.
+4. Evalúa casos especiales de FNBC.
+5. Decide cuándo conviene desnormalizar por rendimiento.
+
+## Práctica por niveles
+
+| Nivel | Meta práctica |
+|------|---------------|
+| Básico | Detectar violaciones de 1FN y 2FN |
+| Medio | Llevar esquemas reales a 3FN documentando pasos |
+| Reto | Analizar trade-offs entre FNBC y conservación de dependencias |
+
+## Hito de proyecto (Unidad V)
+
+Entregar para el caso Hospital:
+
+- Matriz de dependencias funcionales por tabla.
+- Verificación formal de 1FN, 2FN y 3FN.
+- Ajustes finales del esquema con justificación técnica.
+- Riesgos de desnormalización identificados.
+
+## Autoevaluación rápida
+
+- ¿Puedes identificar dependencias parciales y transitivas sin ambigüedad?
+- ¿Cada descomposición preserva integridad y sentido de negocio?
+- ¿Tu esquema final evita anomalías de inserción, borrado y actualización?
+- ¿Sabes justificar cuándo NO desnormalizar?
+
+---
+
 ## 5.1 Pautas Informales de Diseño
 
 Antes de las formas normales, hay 4 pautas informales que guían un buen diseño:

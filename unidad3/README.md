@@ -5,6 +5,44 @@
 
 ---
 
+## Resultado de aprendizaje de la unidad
+
+Al finalizar la unidad podrás transformar un modelo conceptual en un esquema relacional consistente, aplicar restricciones de integridad y expresar consultas con álgebra relacional y SQL equivalente.
+
+## Ruta recomendada de trabajo
+
+1. Estudia dominios, claves y restricciones con ejemplos pequeños.
+2. Verifica integridad de entidades y referencial en casos reales.
+3. Resuelve operaciones de álgebra en orden: σ, π, ⋈, ∪, ∩, −.
+4. Traduce cada expresión de álgebra a SQL y valida resultados.
+5. Documenta decisiones para reutilizarlas en el proyecto final.
+
+## Práctica por niveles
+
+| Nivel | Meta práctica |
+|------|---------------|
+| Básico | Identificar PK, FK y restricciones por tabla |
+| Medio | Convertir 10 consultas de álgebra a SQL correcto |
+| Reto | Diseñar esquema relacional completo para un caso nuevo |
+
+## Hito de proyecto (Unidad III)
+
+Entregar para el caso Hospital:
+
+- Esquema relacional completo.
+- Claves primarias y foráneas justificadas.
+- Reglas de integridad (dominio, entidad, referencial).
+- Primera versión del diccionario de datos.
+
+## Autoevaluación rápida
+
+- ¿Cada tabla tiene PK explícita?
+- ¿Todas las FK referencian claves existentes?
+- ¿Tus consultas en álgebra tienen equivalente SQL probado?
+- ¿Puedes explicar por qué elegiste cada restricción?
+
+---
+
 ## 3.1 Conceptos del Modelo Relacional
 
 El **modelo relacional** fue propuesto por Edgar F. Codd en 1970. Representa los datos como tablas (relaciones) compuestas de filas y columnas.
