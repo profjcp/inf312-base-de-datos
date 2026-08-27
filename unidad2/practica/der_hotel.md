@@ -1,0 +1,55 @@
+```mermaid
+erDiagram
+    CLIENTE ||--o{ RESERVA : "hace"
+    RESERVA ||--o{ PAGO : "tiene"
+    RESERVA }o--o{ HABITACION : "incluye"
+    RESERVA }o--o{ SERVICIO : "contrata"
+
+    RESERVA_HABITACION }|..|{ RESERVA : ""
+    RESERVA_HABITACION }|..|{ HABITACION : ""
+
+    RESERVA_SERVICIO }|..|{ RESERVA : ""
+    RESERVA_SERVICIO }|..|{ SERVICIO : ""
+
+    CLIENTE {
+      INTEGER id_cliente PK
+      VARCHAR nombre
+      VARCHAR apellido
+      VARCHAR email
+      VARCHAR telefono
+    }
+    HABITACION {
+      INTEGER id_habitacion PK
+      VARCHAR numero
+      INTEGER piso
+      VARCHAR tipo
+      INTEGER capacidad
+    }
+    RESERVA {
+      INTEGER id_reserva PK
+      DATE fecha_reserva
+      DATE fecha_ingreso
+      DATE fecha_salida
+      VARCHAR estado
+    }
+    PAGO {
+      INTEGER id_pago PK
+      DECIMAL monto
+      VARCHAR metodo
+      DATE fecha_pago
+    }
+    SERVICIO {
+      INTEGER id_servicio PK
+      VARCHAR nombre
+      DECIMAL precio
+    }
+    RESERVA_HABITACION {
+      DECIMAL precio_noche
+      INTEGER num_huespedes
+      VARCHAR comentario
+    }
+    RESERVA_SERVICIO {
+      INTEGER cantidad
+      DECIMAL precio_unitario
+    }
+```
