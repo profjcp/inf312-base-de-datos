@@ -1,0 +1,59 @@
+```mermaid
+erDiagram
+    DUEÑO ||--o{ DUEÑOS_MASCOTA : "posee"
+    MASCOTA ||--o{ DUEÑOS_MASCOTA : "tiene"
+    MASCOTA ||--o{ CONSULTA : "recibe"
+    VETERINARIO ||--o{ CONSULTA : "realiza"
+    CONSULTA }o--o{ MEDICAMENTO : "receta"
+    CONSULTA ||--o{ APLICACION_VACUNA : "registro"
+    MASCOTA ||--o{ APLICACION_VACUNA : "recibe"
+
+    DUEÑO {
+      INTEGER id_dueño PK
+      VARCHAR nombre
+      VARCHAR apellido
+      VARCHAR email
+      VARCHAR telefono
+    }
+    MASCOTA {
+      INTEGER id_mascota PK
+      VARCHAR nombre
+      VARCHAR especie
+      DATE fecha_nac
+      VARCHAR sexo
+      JSONB atributos_especificos
+    }
+    VETERINARIO {
+      INTEGER id_vet PK
+      VARCHAR nombre
+      VARCHAR apellido
+      VARCHAR especialidad
+      VARCHAR matricula
+    }
+    CONSULTA {
+      INTEGER id_consulta PK
+      DATE fecha
+      VARCHAR motivo
+      TEXT diagnostico
+    }
+    MEDICAMENTO {
+      INTEGER id_med PK
+      VARCHAR nombre
+      VARCHAR presentacion
+    }
+    RECETA {
+      INTEGER dosis
+      VARCHAR frecuencia
+      TEXT instrucciones
+    }
+    VACUNA {
+      INTEGER id_vac PK
+      VARCHAR nombre
+      VARCHAR fabricante
+    }
+    APLICACION_VACUNA {
+      INTEGER id_aplicacion PK
+      DATE fecha
+      VARCHAR lote
+    }
+```
